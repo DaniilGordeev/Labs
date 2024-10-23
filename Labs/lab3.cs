@@ -1,41 +1,47 @@
 ﻿using System;
 
-class Point
-{
-    private int x;
-    private int y;
+// class Point
+// {
+//     int x;
+//     int y;
+//     char sym;
 
-    public Point() { }
+//     public Point(int x, int y, char sym) {
+//         this.x = x;
+//         this.y = y;
+//         this.sym = sym;
+//     }
 
-    public void SetX(int value)
-    {
-        if (value < 0)
-        {
-            throw new Exception("Координата X не может быть отрицательной.");
-        }
-        x = value;
-    }
+//     public void SetX(int value)
+//     {
+//         if (value < 0)
+//         {
+//             throw new Exception("Координата X не может быть отрицательной.");
+//         }
+//         x = value;
+//     }
 
-    public void SetY(int value)
-    {
-        if (value < 0)
-        {
-            throw new Exception("Координата Y не может быть отрицательной.");
-        }
-        y = value;
-    }
+//     public void SetY(int value)
+//     {
+//         if (value < 0)
+//         {
+//             throw new Exception("Координата Y не может быть отрицательной.");
+//         }
+//         y = value;
+//     }
 
-    public void Draw(int x, int y)
-    {
-        SetX(x);
-        SetY(y);
+//     public void Draw(int x, int y)
+//     {
+//         SetX(x);
+//         SetY(y);
 
-        Console.SetCursorPosition(this.x, this.y);
-        Console.Write("()()");
-        Console.SetCursorPosition(this.x, this.y + 1);
-        Console.Write(" /\\ ");
-    }
-}
+//         Console.SetCursorPosition(this.x, this.y);
+//         Console.Write("()()");
+//         Console.SetCursorPosition(this.x, this.y + 1);
+//         Console.Write(" /\\ ");
+//     }
+// }
+
 
 class Lab3
 {
@@ -43,8 +49,8 @@ class Lab3
     {
         try
         {
-            Point point = new Point();
-            point.Draw(3, 3); 
+            // Point point = new Point();
+            // point.Draw(3, 3); 
         }
         catch (Exception ex)
         {

@@ -17,13 +17,13 @@ class Program
                         continueProgram = false;
                         break;
 
-                    // case 3:
-                    //     Lab3.Task3(args);
-                    //     break;
+                    case 3:
+                        Lab3.Task3(args);
+                        break;
 
-                    // case 4:
-                    //     Lab4.Task4(args);
-                    //     break;
+                    case 4:
+                        Lab4.Task4(args);
+                        break;
 
                     // case 5:
                     //     Lab5.Task5(args);
