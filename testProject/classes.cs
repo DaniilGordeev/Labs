@@ -1,3 +1,11 @@
+enum Direction
+	{
+		LEFT,
+		RIGHT,
+		UP,
+		DOWN
+}
+
 class Point
 {
         public int x;
@@ -53,6 +61,31 @@ class Point
         {
             return p.x == this.x && p.y == this.y;
         }
+
+        public void Move(int offset, Direction direction)
+		{
+			if(direction == Direction.RIGHT)
+			{
+				x += offset;
+			}
+			else if(direction == Direction.LEFT)
+			{
+				x -= offset;
+			}
+			else if(direction == Direction.UP)
+			{
+				y -= offset;
+			}
+			else if(direction == Direction.DOWN)
+			{
+				y += offset;
+			}
+	}
+        public void Clear()
+		{
+			sym = ' ';
+			Draw();
+    	}
 
 
 }
@@ -116,3 +149,109 @@ class HorizontalLine : Figure
             }
         }
 }
+
+class Walls
+{
+		List<Figure> wallList;
+
+		public Walls( int mapWidth, int mapHeight )
+		{
+			wallList = new List<Figure>();
+
+			// Отрисовка рамочки
+			HorizontalLine upLine = new HorizontalLine( 0, mapWidth - 2, 0, '+' );
+			HorizontalLine downLine = new HorizontalLine( 0, mapWidth - 2, mapHeight - 1, '+' );
+			VerticalLine leftLine = new VerticalLine( 0, mapHeight - 1, 0, '+' );
+			VerticalLine rightLine = new VerticalLine( 0, mapHeight - 1, mapWidth - 2, '+' );
+
+			wallList.Add( upLine );
+			wallList.Add( downLine );
+			wallList.Add( leftLine );
+			wallList.Add( rightLine );
+		}
+
+		public bool IsHit( Figure figure )
+		{
+			foreach(var wall in wallList)
+			{
+				if(wall.IsHit(figure))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
+		public void Draw()
+		{
+			foreach ( var wall in wallList )
+			{
+				wall.Draw();
+			}
+		}
+}
+
+class Snake : Figure
+{
+    Direction direction;
+
+		public Snake( Point tail, int length, Direction _direction )
+		{
+			direction = _direction;
+			pList = new List<Point>();
+			for ( int i = 0; i < length; i++ )
+			{
+				Point p = new Point( tail );
+				p.Move( i, direction );
+				pList.Add( p );
+			}
+		}
+
+        public void Move()
+		{
+			Point tail = pList.First();			
+			pList.Remove( tail );
+			Point head = GetNextPoint();
+			pList.Add( head );
+
+			tail.Clear();
+			head.Draw();
+		}
+
+		private Point GetNextPoint()
+		{
+			Point head = pList.Last();
+			Point nextPoint = new Point( head );
+			nextPoint.Move( 1, direction );
+			return nextPoint;
+        }
+
+        public void HandleKey(ConsoleKey key)
+		{
+			if ( key == ConsoleKey.LeftArrow )
+				direction = Direction.LEFT;
+			else if ( key == ConsoleKey.RightArrow )
+				direction = Direction.RIGHT;
+			else if ( key == ConsoleKey.DownArrow )
+				direction = Direction.DOWN;
+			else if ( key == ConsoleKey.UpArrow )
+				direction = Direction.UP;
+	    }
+
+
+        public bool Eat( Point food )
+		{
+			Point head = GetNextPoint();
+			if ( head.IsHit( food ) )
+			{
+				food.sym = head.sym;
+				pList.Add( food );
+				return true;
+			}
+			else
+            {
+				return false;
+		    }
+    }
+
+}   

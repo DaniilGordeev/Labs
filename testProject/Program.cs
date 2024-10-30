@@ -29,9 +29,17 @@ class Program
                         Lab5.Task5(args);
                         break;
 
-                    // case 6:
-                    //     Lab6.Task6(args);
-                    //     break;
+                    case 6:
+                        Lab6.Task6(args);
+                        break;
+                    
+                    case 7:
+                        Lab7.Task7(args);
+                        break;
+                    
+                    case 8:
+                        Lab8.Task8(args);
+                        break;
 
                     default:
                         Console.WriteLine("Такой программы нет...");
